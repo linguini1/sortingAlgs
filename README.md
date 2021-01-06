@@ -54,7 +54,7 @@ for i in range(1, len(arr)):
 ```
 
 <h3>Efficiency</h3>
-This algorithm has also uses nested loops, and is more efficient on average than Bubble Sort. It's complexity is still
+This algorithm has also uses nested loops, and is more efficient on average than Bubble Sort. Its complexity is still
 O(n^2) however.
 
 ![alt text](./graphs/Insertion%20Sort%20Efficiency.png)
