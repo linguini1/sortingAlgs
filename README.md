@@ -8,8 +8,24 @@ end of the array, while larger elements make their way to the other. This algori
 variable, which stores the element being switched to avoid overwriting necessary information.
 
 <h3>Code</h3>
+```python
+ n = len(arr)
+
+# Traverse through all array elements
+for i in range(n - 1):
+
+    # Last i elements are already in place
+    for j in range(0, n - i - 1):
+
+        # Traverse the array from 0 to n-i-1
+        # Swap if the element found is greater than the next element
+        if arr[j] > arr[j + 1]:
+            arr[j], arr[j + 1] = arr[j + 1], arr[j]
+```
 
 <h3>Efficiency</h3>
+This algorithm makes use of an inefficient temp variable, and uses two nested for loops. It has a complexity of O(n^2).
+
 ![alt text](./graphs/Bubble%20Sort%20Efficiency.png)
 
 ## Insertion Sort
@@ -19,8 +35,26 @@ remaining unsorted numbers. It moves sequentially through the array and assures 
 is out of place, it is moved sequentially down the array until it is in the right position.
 
 <h3>Code</h3>
+```python
+# Traverse through 1 to len(arr)
+for i in range(1, len(arr)):
+
+    key = arr[i]
+
+    # Move elements of arr[0..i-1], that are greater than key, to one position ahead of their current position
+    j = i - 1
+
+    while j >= 0 and key < arr[j]:
+        arr[j + 1] = arr[j]
+        j -= 1
+
+    arr[j + 1] = key
+```
 
 <h3>Efficiency</h3>
+This algorithm has also uses nested loops, and is more efficient on average than Bubble Sort. It's complexity is still
+O(n^2) however.
+
 ![alt text](./graphs/Insertion%20Sort%20Efficiency.png)
 
 ## Selection Sort
@@ -30,8 +64,24 @@ it continues to search for the next lowest value and places it in the next spot 
 continues this process until the array is sorted.
 
 <h3>Code</h3>
+```python
+for i in range(len(arr)):
+
+    # Find the minimum element in remaining unsorted array
+    min_idx = i
+
+    for j in range(i + 1, len(arr)):
+        if arr[min_idx] > arr[j]:
+            min_idx = j
+
+    # Swap the found minimum element with the first element
+    arr[i], arr[min_idx] = arr[min_idx], arr[i]
+```
 
 <h3>Efficiency</h3>
+The Selection Sort algorithm also uses nested for loops. Generally, this algorithm should perform worse than insertion
+sort. It also has a complexity of O(n^2).
+
 ![alt text](./graphs/Selection%20Sort%20Efficiency.png)
 
 ## Quick Sort
@@ -43,8 +93,19 @@ complete, the array is split into two new arrays on the pivot point, and Quick S
 arrays. Eventually, the algorithm returns a sorted array.
 
 <h3>Code</h3>
+```python
+if len(arr) <= 1:
+    return arr
+
+else:
+    return quick_sort([e for e in arr[1:] if e <= arr[0]]) + [arr[0]] + \
+           quick_sort([e for e in arr[1:] if e > arr[0]])
+```
 
 <h3>Efficiency</h3>
+Generally, Quick Sort is the most efficient of all these algorithms, and usually has a complexity of O(n log(n)) in 
+average scenarios. It still has a complexity of O(n^2) in the worst case however.
+
 ![alt text](./graphs/Quick%20Sort%20Efficiency.png)
 
 # Comparison
