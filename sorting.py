@@ -5,7 +5,19 @@ import random
 import time
 import math
 
-# Getting user input to make custom array
+# Getting user input
+
+# Which sorting algorithm
+while True:
+    algorithm = input("Use bubble sort (1), insertion sort (2), selection sort (3), or quick sort (4): ")
+
+    # Invalid selection
+    if algorithm not in ['1', '2', '3', '4']:
+        print("You must pick option 1, 2, 3 or 4.")
+
+    # Selected successfully
+    else:
+        break
 
 # Array size
 while True:
@@ -19,8 +31,13 @@ while True:
         # Array must be greater than 1
         if arraySize <= 1:
             print("Your array must store more than two numbers.")
+
+        # Quicksort exceeds the stack limit with arrays over 9000 elements, so the number must be lower than that
         else:
-            break
+            if arraySize > 9000 and algorithm == "4":
+                print("If you selected quicksort, your array cannot be longer than 9000 elements.")
+            else:
+                break
 
     except ValueError:
         print("You didn't input a valid integer size.")
@@ -45,18 +62,6 @@ while True:
             break
         except ValueError:
             print("You didn't give a valid integer!")
-
-# Which sorting algorithm
-while True:
-    algorithm = input("Use bubble sort (1), insertion sort (2), selection sort (3), or quick sort (4): ")
-
-    # Invalid selection
-    if algorithm not in ['1', '2', '3', '4']:
-        print("You must pick option 1, 2, 3 or 4.")
-
-    # Selected successfully
-    else:
-        break
 
 # Filling an array
 randNums = [random.randint(minRange, maxRange) for _ in range(arraySize)]
