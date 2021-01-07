@@ -42,6 +42,21 @@ while True:
     except ValueError:
         print("You didn't input a valid integer size.")
 
+# Integers or floats
+while True:
+    integers = input("Use integer elements (1) or float elements (2): ")
+
+    if integers == "1":  # Integers
+        integers = True
+        break
+
+    elif integers == "2":  # Floats
+        integers = False
+        break
+
+    else:  # Bad input
+        print("Invalid selection.")
+
 # Getting range for random numbers
 while True:
 
@@ -54,17 +69,24 @@ while True:
     if len(numRange) != 2:
         print("Invalid input, try again!")
 
-    # Checking to make sure they're integers
+    # Checking to make sure they convert to numbers
     else:
-        try:
-            minRange = min(int(numRange[0]), int(numRange[1]))
-            maxRange = max(int(numRange[0]), int(numRange[1]))
-            break
-        except ValueError:
-            print("You didn't give a valid integer!")
 
-# Filling an array
-randNums = [random.randint(minRange, maxRange) for _ in range(arraySize)]
+        if integers:
+            try:
+                minRange = min(int(numRange[0]), int(numRange[1]))
+                maxRange = max(int(numRange[0]), int(numRange[1]))
+                break
+            except ValueError:
+                print("You didn't give a valid integer!")
+
+        else:
+            try:
+                minRange = min(float(numRange[0]), float(numRange[1]))
+                maxRange = max(float(numRange[0]), float(numRange[1]))
+                break
+            except ValueError:
+                print("You didn't give a valid float!")
 
 
 # Factor
@@ -81,8 +103,11 @@ def array_display(arr):
     greatestFactor = factor_int(len(arr))[0]
 
     # Making the array fit on screen if the square width is too large
-    if greatestFactor > 50:
+    if integers and greatestFactor > 50:
         greatestFactor = 50
+
+    elif not integers and greatestFactor > 11:
+        greatestFactor = 11
 
     # Printing array
     for index, _ in enumerate(arr):
@@ -92,7 +117,12 @@ def array_display(arr):
         if index % greatestFactor == 0:  # When we've completed a row, make a new line
             print()
 
-        print(f"{_.zfill(len(str(maxRange)))} ", end="")  # Zero pad based on length of max value, no line break
+        if integers:  # Integers
+            print(f"{_.zfill(len(str(maxRange)))} ", end="")  # Zero pad based on length of max value, no line break
+
+        else:  # Floats
+            # Decimals are maximum 18 characters long, including the period
+            print(f"{_.zfill(18)} ", end="")
 
 
 # Bubble sort algorithm
@@ -174,6 +204,13 @@ def quick_sort(arr):
         return quick_sort([e for e in arr[1:] if e <= arr[0]]) + [arr[0]] + \
                quick_sort([e for e in arr[1:] if e > arr[0]])
 
+
+# Filling an array
+if integers:  # Integer array
+    randNums = [random.randint(minRange, maxRange) for _ in range(arraySize)]
+
+else:  # Float Array
+    randNums = [random.uniform(minRange, maxRange) for _ in range(arraySize)]
 
 # Printing original array
 print()
