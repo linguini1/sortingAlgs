@@ -1,5 +1,9 @@
 # Sorting Algorithms
 
+<h3>*All the algorithms were tested using integers and floats between 1 and 10.*</h3>
+
+# Analysis
+
 ## Bubble Sort
 <h3>Explanation</h3>
 Bubble Sort works by comparing two adjacent elements in an array. If the first element is larger than the second, they
@@ -115,14 +119,59 @@ average scenarios. It still has a complexity of O(n^2) in the worst case however
 # Comparison
 All the algorithms were tested by sorting an array of size x, populated with integers between 1 and 10 inclusive.
 
-## Non-Recursive Algorithms
+## Iterative Algorithms
 Here's the comparison in efficiency between the three non-recursive algorithms: Bubble Sort, Insertion Sort and
 Selection Sort. Quick Sort wasn't included on this graph because it could not process over 9500 array elements without
 exceeding the stack call limit, and thus did not show up on a graph of this scale.
 
 ![alt text](./graphs/Sorting%20Algorithm%20Efficiency.png)
 
-## Recursive Algorithms
+## Recursive & Iterative Algorithms
 Here is a comparison in the efficiency of all the algorithms up to an array size of 9500 elements.
 
 ![alt text](./graphs/Sorting%20Algorithm%20Efficiency%20Close.png)
+
+# Program Use
+
+## Options
+
+<h4>Array Size</h4>
+Arrays can be chosen in any size, except when Quick Sort is selected, as it can only reliably sort 9500 items before 
+overflowing the stack.
+
+<h4>Data Type</h4>
+The program allows the user to select whether the array will be populated with integer elements or with float elements.
+The user may also select a range of numbers to generate the array from.
+
+<h4>Algorithm</h4>
+The user can select between Bubble Sort, Insertion Sort, Selection Sort and Quick Sort. Quick Sort selections comes with
+limitations described above in "Array Size".
+
+## Formatting
+
+<h4>Array</h4>
+The array are displayed in squares/rectangles based on the largest two factors that have a product similar to the array
+size.
+For instance, an array size of 12 will be displayed as a 3x4 rectangle, where an array of size 29 will be displayed as a
+rectangle of 5x6 with one spot empty at the end.
+
+If the smallest factor is still greater than 50 (for integer numbers), then the program will automatically set one
+factor to 50 and have the other factor compensate, so that the whole array can fit on a screen. With float numbers, the 
+smallest factor must be 11 or less, or it will be reset to 11. This is because floats take up more screen real estate 
+than integers (they are usually 17-18 characters long).
+<!-- language: lang-none -->
+                                  Array of size 12                                             Array of size 29
+                                  ----------------                                             ----------------
+                                      06 03 10                                                  07 10 09 01 01
+                                      09 01 09                                                  01 08 01 04 03
+                                      02 01 03                                                  08 06 08 06 10
+                                      08 10 08                                                  10 07 02 08 05
+                                                                                                03 05 01 03 05
+                                                                                                02 04 09 08
+Both the original array and the sorted array are displayed.
+
+<h4>Statistics</h4>
+Statistics are displayed with the algorithm name, the size of the array and how long the algorithm took to sort it, in
+seconds. Here is an example output:
+<!-- language: lang-none -->
+    Insertion Sort sorted an array of size 10000 in 3.6059556007385254s.
