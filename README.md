@@ -159,19 +159,21 @@ If the smallest factor is still greater than 50 (for integer numbers), then the 
 factor to 50 and have the other factor compensate, so that the whole array can fit on a screen. With float numbers, the 
 smallest factor must be 11 or less, or it will be reset to 11. This is because floats take up more screen real estate 
 than integers (they are usually 17-18 characters long).
+
 <!-- language: lang-none -->
-                                  Array of size 12                                             Array of size 29
-                                  ----------------                                             ----------------
-                                      06 03 10                                                  07 10 09 01 01
-                                      09 01 09                                                  01 08 01 04 03
-                                      02 01 03                                                  08 06 08 06 10
-                                      08 10 08                                                  10 07 02 08 05
-                                                                                                03 05 01 03 05
-                                                                                                02 04 09 08
+                  Array of size 12                                             Array of size 29
+                  ----------------                                             ----------------
+                      06 03 10                                                  07 10 09 01 01
+                      09 01 09                                                  01 08 01 04 03
+                      02 01 03                                                  08 06 08 06 10
+                      08 10 08                                                  10 07 02 08 05
+                                                                                03 05 01 03 05
+                                                                                02 04 09 08
 Both the original array and the sorted array are displayed.
 
 <h4>Statistics</h4>
 Statistics are displayed with the algorithm name, the size of the array and how long the algorithm took to sort it, in
 seconds. Here is an example output:
+
 <!-- language: lang-none -->
     Insertion Sort sorted an array of size 10000 in 3.6059556007385254s.
