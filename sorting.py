@@ -22,19 +22,19 @@ while True:
 # Array size
 while True:
 
-    arraySize = input("Number of integers the array will store: ")
+    arraySize = input("Number(s) of elements the array will store (separate multiple numbers with a comma): ")
 
     # Converting to int
     try:
-        arraySize = int(arraySize)
+        arraySize = [int(_) for _ in arraySize.split(",")]
 
         # Array must be greater than 1
-        if arraySize <= 1:
+        if sorted(arraySize)[0] <= 1:
             print("Your array must store more than two numbers.")
 
         # Quicksort exceeds the stack limit with arrays over 9000 elements, so the number must be lower than that
         else:
-            if arraySize > 9000 and algorithm == "4":
+            if sorted(arraySize)[-1] > 9000 and algorithm == "4":
                 print("If you selected quicksort, your array cannot be longer than 9000 elements.")
             else:
                 break
@@ -87,6 +87,21 @@ while True:
                 break
             except ValueError:
                 print("You didn't give a valid float!")
+
+# Display the arrays?
+while True:
+    display = input("Display the arrays to console? (y/n): ")
+
+    if display.lower() == "y" or display.lower() == "yes":  # Display
+        display = True
+        break
+
+    elif display.lower() == "n" or display.lower() == "no":  # No display
+        display = False
+        break
+
+    else:  # Invalid input
+        print("Choose yes or no.")
 
 
 # Factor
@@ -205,44 +220,48 @@ def quick_sort(arr):
                quick_sort([e for e in arr[1:] if e > arr[0]])
 
 
-# Filling an array
-if integers:  # Integer array
-    randNums = [random.randint(minRange, maxRange) for _ in range(arraySize)]
+for size in arraySize:
 
-else:  # Float Array
-    randNums = [random.uniform(minRange, maxRange) for _ in range(arraySize)]
+    # Filling an array
+    if integers:  # Integer array
+        randNums = [random.randint(minRange, maxRange) for _ in range(size)]
 
-# Printing original array
-print()
-print("-----ORIGINAL ARRAY-----")
-array_display(randNums)
-print("\n\n")
+    else:  # Float Array
+        randNums = [random.uniform(minRange, maxRange) for _ in range(size)]
 
-# Performing sort
-if algorithm == "1":  # Bubble
-    sortedArr, sortTime = bubble_sort(randNums)
+    if display:
+        # Printing original array if display is on
+        print()
+        print("-----ORIGINAL ARRAY-----")
+        array_display(randNums)
+        print("\n\n")
 
-elif algorithm == "2":  # Insertion
-    sortedArr, sortTime = insertion_sort(randNums)
+    # Performing sort
+    if algorithm == "1":  # Bubble
+        sortedArr, sortTime = bubble_sort(randNums)
 
-elif algorithm == "3":  # Selection
-    sortedArr, sortTime = selection_sort(randNums)
+    elif algorithm == "2":  # Insertion
+        sortedArr, sortTime = insertion_sort(randNums)
 
-else:  # Quick
-    start = time.time()  # Start time
-    sortedArr = quick_sort(randNums)
-    end = time.time()  # End time
-    sortTime = end - start
+    elif algorithm == "3":  # Selection
+        sortedArr, sortTime = selection_sort(randNums)
 
-# Printing sorted array
-print("-----SORTED ARRAY-----")
-array_display(sortedArr)
-print("\n\n")
+    else:  # Quick
+        start = time.time()  # Start time
+        sortedArr = quick_sort(randNums)
+        end = time.time()  # End time
+        sortTime = end - start
 
-# Displaying information
-algorithms = {"1": "Bubble",
-              "2": "Insertion",
-              "3": "Selection",
-              "4": "Quick"}  # Sort type for display
+    if display:
+        # Printing sorted array if display is on
+        print("-----SORTED ARRAY-----")
+        array_display(sortedArr)
+        print("\n\n")
 
-print(f"{algorithms[algorithm]} Sort sorted an array of size {arraySize} in {sortTime}s.")
+    # Displaying information
+    algorithms = {"1": "Bubble",
+                  "2": "Insertion",
+                  "3": "Selection",
+                  "4": "Quick"}  # Sort type for display
+
+    print(f"{algorithms[algorithm]} Sort sorted an array of size {size} in {sortTime}s.")
