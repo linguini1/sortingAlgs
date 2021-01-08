@@ -1,6 +1,7 @@
 # Sorting Algorithms
 
-<h3>All the algorithms were tested using integers and floats between 1 and 10.</h3>
+<h3>All the algorithms were tested using integers and floats between 1 and 10. Background processing tests were
+run with the CPU operating between 30-40%.</h3>
 
 # Analysis
 
